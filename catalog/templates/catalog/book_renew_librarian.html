@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Livre: {{book_availability.book.title}}</h1>
+    <p>Emprunteur: {{book_availability.borrower}}</p>
+    <p{% if book_availability.is_overdue %} class="text-danger"{% endif %}>Date de retour: {{book_availability.due_back}}</p>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

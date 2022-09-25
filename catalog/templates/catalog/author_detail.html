@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>{{ author }} </h1>
+<div>
+    {{author.biography}}
+</div>
+
+{% if author.book_set.all %}
+<div style="margin-left:20px;margin-top:20px">
+
+  <h4>Livres de l'auteur</h4>
+
+  <dl>
+  {% for book in author.book_set.all %}
+    <dt><a href="{% url 'book-detail' book.pk %}">{{book}}</a> ({{book.bookavailability_set.all.count}})</dt>
+    <dd>{{book.content}}</dd>
+  {% endfor %}
+  </dl>
+
+</div>
+{% endif %}
+{% endblock %}

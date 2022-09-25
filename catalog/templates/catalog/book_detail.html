@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h1>Titre: {{ book.title }}</h1>
+
+  <p><strong>Auteur:</strong> <a href="">{{ book.author }}</a></p>
+  <p><strong>Synopsis:</strong> {{ book.content }}</p>
+  <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+  <p><strong>Catégories:</strong> {{ book.category.all|join:", " }}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Exemplaires</h4>
+
+    {% for copy in book.bookavailability_set.all %}
+      <hr>
+      <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">
+        {{ copy.get_status_display }}
+      </p>
+      {% if copy.status != 'a' %}
+        <p><strong>Date de retour:</strong> {{ copy.due_back }}</p>
+      {% endif %}
+      <p><strong>Maison d'édition:</strong> {{ copy.imprint }}</p>
+      <p class="text-muted"><strong>Identifiant:</strong> {{ copy.id }}</p>
+    {% endfor %}
+  </div>
+{% endblock %}

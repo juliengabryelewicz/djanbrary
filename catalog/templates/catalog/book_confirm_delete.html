@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>Supprimer le livre de la bibliothèque</h1>
+
+<p>Êtes-vous sûr de vouloir supprimer: {{ book }}?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" action="" value="Yes, delete.">
+</form>
+
+{% endblock %}

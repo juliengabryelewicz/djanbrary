@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <h1>Accueil</h1>
+  <p>Statistiques:</p>
+  <ul>
+    <li><strong>Nombre de livres:</strong> {{ num_books }}</li>
+    <li><strong>Nombre d'exemplaires:</strong> {{ num_availabilities }}</li>
+    <li><strong>Nombre d'exemplaires disponibles:</strong> {{ num_availabilities_open }}</li>
+    <li><strong>Nombre d'auteurs:</strong> {{ num_authors }}</li>
+  </ul>
+{% endblock %}

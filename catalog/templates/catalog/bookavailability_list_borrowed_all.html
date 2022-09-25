@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Tous les livres empruntés</h1>
+
+    {% if bookavailability_list %}
+    <ul>
+
+      {% for bookavailability in bookavailability_list %} 
+      <li class="{% if bookavailability.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'book-detail' bookavailability.book.pk %}">{{bookavailability.book.title}}</a> ({{ bookavailability.due_back }}) {% if user.is_staff %}- {{ bookavailability.borrower }}{% endif %} {% if perms.catalog.can_mark_returned %}- <a href="{% url 'renew-book-librarian' bookavailability.id %}">Renew</a>  {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>Aucun livre emprunté.</p>
+    {% endif %}       
+{% endblock %}
